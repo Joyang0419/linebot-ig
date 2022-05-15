@@ -24,11 +24,10 @@ class ServiceLineBot:
         message_parser = message.split(' ', 1)
         action_str = message_parser[0]
 
-        if len(message_parser) == 2:
-            if action_str == 'get':
-                account = message_parser[1]
-                action = ServiceLineBot.actions_menu(action=action_str)
-                return action(account=account)
+        if len(message_parser) == 2 and action_str == 'get':
+            account = message_parser[1]
+            action = ServiceLineBot.actions_menu(action=action_str)
+            return action(account=account)
         else:
             action = ServiceLineBot.actions_menu(action=message)
             if action:
@@ -92,11 +91,9 @@ class ServiceLineBot:
 
     @staticmethod
     def help_message():
-        help_message_content = """
-        mei mei: give one mei mei photo and url.
+        help_message_content = """mei mei: give one mei mei photo and url.
         get <ig_account>: get images from ig_account, but don't provide image 
-        right now, next time mei mei have change to choose it to send you.
-        """
+        right now, next time mei mei have change to choose it to send you."""
         return [
             TextSendMessage(text=help_message_content)
         ]
